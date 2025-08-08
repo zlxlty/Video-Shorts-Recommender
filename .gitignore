@@ -64,3 +64,60 @@ maildir
 
 # Coding Agent
 CLAUDE.md
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Data files
+data/raw/*
+data/processed/*
+data/features/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/features/.gitkeep
+
+# Model files
+models/checkpoints/*
+!models/checkpoints/.gitkeep
+*.pt
+*.pth
+*.onnx
+
+# Logs
+logs/
+*.log
+
+# W&B
+wandb/
+
+# Redis
+dump.rdb
+
+# Monitoring
+monitoring/prometheus_data/
+monitoring/grafana_data/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Configuration overrides
+configs/local.yaml
+configs/*.local.yaml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# ruff
+.ruff_cache/

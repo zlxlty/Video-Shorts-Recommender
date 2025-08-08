@@ -1,0 +1,154 @@
+# YouTube Shorts Recommendation System Configuration
+
+# Data Generation
+data:
+  n_users: 10000
+  n_videos: 50000
+  n_interactions: 1000000
+  
+  # User features
+  user_features:
+    age_range: [13, 80]
+    interests: [
+      "sports", "music", "gaming", "cooking", "travel", 
+      "tech", "fashion", "fitness", "education", "comedy",
+      "news", "science", "art", "diy", "pets"
+    ]
+    
+  # Video features
+  video_features:
+    duration_range: [15, 60]  # seconds
+    categories: [
+      "entertainment", "education", "gaming", "music", "sports",
+      "news", "comedy", "howto", "travel", "fashion", "tech"
+    ]
+    tags_per_video: [3, 10]
+    
+  # Interaction patterns
+  interaction:
+    watch_time_ratio: [0.1, 1.0]  # percentage of video watched
+    like_probability: 0.15
+    share_probability: 0.05
+    skip_probability: 0.3
+    
+  # Temporal patterns
+  temporal:
+    days_of_history: 30
+    sessions_per_day: [1, 5]
+    videos_per_session: [5, 20]
+
+# Model Configuration
+model:
+  # Embedding dimensions
+  embedding:
+    user_dim: 128
+    video_dim: 768
+    context_dim: 32
+    
+  # Transformer architecture
+  transformer:
+    n_layers: 4
+    n_heads: 8
+    hidden_dim: 256
+    dropout: 0.1
+    
+  # Training
+  training:
+    batch_size: 128
+    learning_rate: 0.001
+    epochs: 50
+    early_stopping_patience: 5
+    weight_decay: 0.0001
+    
+  # Loss weights
+  loss:
+    ctr_weight: 0.7
+    diversity_weight: 0.3
+    
+# Candidate Generation
+candidate_generation:
+  n_candidates: 1000
+  
+  # Strategy weights
+  strategy_weights:
+    popularity: 0.2
+    collaborative: 0.3
+    content_based: 0.2
+    vector_similarity: 0.3
+    
+  # FAISS configuration
+  faiss:
+    index_type: "IVF1024,Flat"
+    nprobe: 10
+    
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 100
+    
+  # Caching
+  cache:
+    ttl: 3600  # seconds
+    max_size: 10000
+    
+# Redis Configuration
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  decode_responses: true
+  
+  # Connection pool
+  pool:
+    max_connections: 50
+    
+# Evaluation Metrics
+evaluation:
+  metrics:
+    - ndcg_at_k: [5, 10, 20]
+    - hit_rate_at_k: [5, 10, 20]
+    - diversity_at_k: [10, 20]
+    - coverage
+    
+  # A/B Testing
+  ab_testing:
+    min_sample_size: 1000
+    confidence_level: 0.95
+    
+# Monitoring
+monitoring:
+  prometheus:
+    port: 9090
+    
+  grafana:
+    port: 3000
+    
+  # Alerting thresholds
+  alerts:
+    latency_p99_ms: 100
+    error_rate: 0.01
+    model_drift_threshold: 0.1
+    
+# Paths
+paths:
+  data:
+    raw: "data/raw"
+    processed: "data/processed"
+    features: "data/features"
+    
+  models:
+    checkpoints: "models/checkpoints"
+    best_model: "models/checkpoints/best_model.pt"
+    
+  logs: "logs"
+  
+# Random seed for reproducibility
+seed: 42
+
+# Environment
+environment: "development"  # development, staging, production

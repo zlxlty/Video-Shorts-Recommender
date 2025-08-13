@@ -121,3 +121,8 @@ configs/*.local.yaml
 
 # ruff
 .ruff_cache/
+
+.tutorial
+
+*.md
+!README.md
